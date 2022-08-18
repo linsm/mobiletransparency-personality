@@ -15,10 +15,11 @@ public class AdminController : ControllerBase
     public AdminController(ILogger<AdminController> logger)
     {        
         _logger = logger;
-        //@TODO create connection service
-        GrpcChannel channel = GrpcChannel.ForAddress("INSERTIP");
+        string? address = Environment.GetEnvironmentVariable("trillian_url");
+        if(address == null) throw new HttpRequestException();                
+        GrpcChannel channel = GrpcChannel.ForAddress(address);
         _adminClient = new TrillianAdmin.TrillianAdminClient(channel);        
-        _logClient = new TrillianLog.TrillianLogClient(channel);
+        _logClient = new TrillianLog.TrillianLogClient(channel);        
     }
 
     [HttpGet(Name = "GetTreeDetails")]

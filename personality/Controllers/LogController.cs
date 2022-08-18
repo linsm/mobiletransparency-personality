@@ -14,8 +14,9 @@ public class LogController : ControllerBase
     public LogController(ILogger<LogController> logger)
     {
         _logger = logger;
-        //@TODO create connection service
-        var channel = GrpcChannel.ForAddress("INSERTIP");
+         string? address = Environment.GetEnvironmentVariable("trillian_url");
+        if(address == null) throw new HttpRequestException();                
+        GrpcChannel channel = GrpcChannel.ForAddress(address);
         _logClient = new TrillianLog.TrillianLogClient(channel);
     }
 
