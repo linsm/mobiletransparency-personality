@@ -23,9 +23,8 @@ public class Leaf {
         byte[] prefix = { 0 };
         byte[] leafValueBytes = value.toByteArray();
         byte[] result = new byte[prefix.Length + leafValueBytes.Length];
-        prefix.CopyTo(result,0);
-        leafValueBytes.CopyTo(result,prefix.Length);        
+        System.Buffer.BlockCopy(prefix, 0, result, 0, prefix.Length);
+        System.Buffer.BlockCopy(leafValueBytes, 0, result, prefix.Length, leafValueBytes.Length);
         return pb::ByteString.CopyFrom(SHA256.HashData(result));
     }
-
 }

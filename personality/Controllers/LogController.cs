@@ -53,4 +53,12 @@ public class LogController : ControllerBase
         var response = _logClient.GetConsistencyProof(request);
         return response.ToString();
     }
+
+    [HttpGet(Name="LatestSignedLogRoot")]
+    public string GetLatestSignedLogRoot(long treeId) {
+        GetLatestSignedLogRootRequest request = new GetLatestSignedLogRootRequest();
+        request.LogId = treeId;
+        GetLatestSignedLogRootResponse response = _logClient.GetLatestSignedLogRoot(request);
+        return response.SignedLogRoot.ToString();
+    }
 }

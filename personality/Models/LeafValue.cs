@@ -33,15 +33,13 @@ public class LeafValue
 
     public byte[] toByteArray()
     {
-        using (MemoryStream stream = new MemoryStream())
-        {
-            using (BinaryWriter writer = new BinaryWriter(stream))
-            {
-                writer.Write(applicationId);
-                writer.Write(version);
-                writer.Write(signatureData);
-            }
-            return stream.ToArray();
-        }
+        byte[] applicationIdBytes = System.Text.Encoding.UTF8.GetBytes(applicationId);
+        byte[] versionBytes = System.Text.Encoding.UTF8.GetBytes(version);
+        byte[] signatureBytes = System.Text.Encoding.UTF8.GetBytes(signatureData);
+        byte[] result = new byte[applicationIdBytes.Length + versionBytes.Length + signatureBytes.Length];
+        System.Buffer.BlockCopy(applicationIdBytes, 0, result, 0, applicationIdBytes.Length);
+        System.Buffer.BlockCopy(versionBytes, 0, result, applicationIdBytes.Length, versionBytes.Length);
+        System.Buffer.BlockCopy(signatureBytes, 0, result, applicationIdBytes.Length + versionBytes.Length, signatureBytes.Length);
+        return result;
     }
 }
