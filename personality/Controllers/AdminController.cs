@@ -28,6 +28,14 @@ public class AdminController : ControllerBase
         return accessibleTrees.ToString();
     }
 
+        [HttpGet(Name = "GetTree")]
+    public string GetTree(long treeId) {
+        Tree tree = _adminClient.GetTree(new GetTreeRequest() {
+            TreeId = treeId
+        });
+        return tree.ToString();
+    }
+
     [HttpPost(Name = "CreateTree")]
     public long CreateTree() {
         Tree tree = new Tree();
