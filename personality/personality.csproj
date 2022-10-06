@@ -14,19 +14,5 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <Protobuf Include="google\rpc\status.proto">
-      <SourceUrl>https://raw.githubusercontent.com/linsm/trillian/master/third_party/googleapis/google/rpc/status.proto</SourceUrl>
-    </Protobuf>
-    <Protobuf Include="trillian.proto" GrpcServices="Client">
-      <SourceUrl>https://raw.githubusercontent.com/linsm/trillian/master/trillian.proto</SourceUrl>
-    </Protobuf>
-    <Protobuf Include="trillian_admin_api.proto" GrpcServices="Client">
-      <SourceUrl>https://raw.githubusercontent.com/linsm/trillian/master/trillian_admin_api.proto</SourceUrl>
-    </Protobuf>
-    <Protobuf Include="trillian_log_api.proto" GrpcServices="Client">
-      <SourceUrl>https://raw.githubusercontent.com/linsm/trillian/master/trillian_log_api.proto</SourceUrl>
-    </Protobuf>
-  </ItemGroup>
+  </ItemGroup>  
 </Project>

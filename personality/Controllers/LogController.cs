@@ -59,6 +59,6 @@ public class LogController : ControllerBase
         GetLatestSignedLogRootRequest request = new GetLatestSignedLogRootRequest();
         request.LogId = treeId;
         GetLatestSignedLogRootResponse response = _logClient.GetLatestSignedLogRoot(request);
-        return response.SignedLogRoot.ToString();
+        return response.Proof.Hashes.ToString();
     }
 }
