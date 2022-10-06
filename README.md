@@ -17,11 +17,14 @@ dotnet tool install -g dotnet-grpc
 The references of the Google Trillian Log Server can be added by running the following command in the project's root directory:
 
 ```shell
-dotnet-grpc add-url -o trillian.proto -p personality.csproj -s Client https://raw.githubusercontent.com/linsm/trillian/master/trillian.proto
-dotnet-grpc add-url -o trillian_log_api.proto -p personality.csproj -s Client https://raw.githubusercontent.com/linsm/trillian/master/trillian_log_api.proto
-dotnet-grpc add-url -o trillian_admin_api.proto -p personality.csproj -s Client https://raw.githubusercontent.com/linsm/trillian/master/trillian_admin_api.proto
-dotnet-grpc add-url -o google/rpc/status.proto -p personality.csproj -s Client https://raw.githubusercontent.com/linsm/trillian/master/third_party/googleapis/google/rpc/status.proto
+dotnet-grpc add-url -o trillian.proto -p personality.csproj -s Client https://raw.githubusercontent.com/google/trillian/master/trillian.proto
+dotnet-grpc add-url -o trillian_log_api.proto -p personality.csproj -s Client https://raw.githubusercontent.com/google/trillian/master/trillian_log_api.proto
+dotnet-grpc add-url -o trillian_admin_api.proto -p personality.csproj -s Client https://raw.githubusercontent.com/google/trillian/master/trillian_admin_api.proto
+dotnet-grpc add-url -o google/rpc/status.proto -p personality.csproj -s Client https://raw.githubusercontent.com/googleapis/googleapis/c81bb70/google/rpc/status.proto
 ```
+
+Last tested commit of the Google Trillian github repository was 940d76c. 
+
 ## Notes SSL support
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout personality.key -out personality.crt -config devcert.conf 

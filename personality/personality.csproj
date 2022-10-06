@@ -8,11 +8,26 @@
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.21.5" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.47.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.ClientFactory" Version="2.47.0" />
     <PackageReference Include="Grpc.Net.Client" Version="2.47.0" />
     <PackageReference Include="Grpc.Tools" Version="2.48.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>  
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="google\rpc\status.proto" GrpcServices="Client">
+      <SourceUrl>https://raw.githubusercontent.com/googleapis/googleapis/c81bb70/google/rpc/status.proto</SourceUrl>
+    </Protobuf>
+    <Protobuf Include="trillian.proto" GrpcServices="Client">
+      <SourceUrl>https://raw.githubusercontent.com/google/trillian/master/trillian.proto</SourceUrl>
+    </Protobuf>
+    <Protobuf Include="trillian_admin_api.proto" GrpcServices="Client">
+      <SourceUrl>https://raw.githubusercontent.com/google/trillian/master/trillian_admin_api.proto</SourceUrl>
+    </Protobuf>
+    <Protobuf Include="trillian_log_api.proto" GrpcServices="Client">
+      <SourceUrl>https://raw.githubusercontent.com/google/trillian/master/trillian_log_api.proto</SourceUrl>
+    </Protobuf>
+  </ItemGroup>
 </Project>

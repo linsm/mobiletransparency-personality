@@ -2,3 +2,7 @@ devcert.conf
 personality.crt
 personality.key
 personality.pfx
+personality/trillian.proto
+personality/trillian_admin_api.proto
+personality/trillian_log_api.proto
+personality/google/rpc/status.proto
