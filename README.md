@@ -1,5 +1,17 @@
 # mobiletransparency-personality
 
+## Docker
+The personality can be hosted as docker container. To build the container run the following command in the project directory:
+```shell
+docker build -t personality personality/
+```
+Execute the following command to run the docker continer. Please consider to adapt the network and the trillian_url environment variable depending 
+```shell
+docker run -p 8080:80 --network deployment_default -e "trillian_url=http://172.20.0.4:8090" --name personality personality
+```
+
+
+
 ## Reference Google Trillian protobuf files
 To communicate with the Google Trillian Log Server (grpc), the dotnet core project needs to reference certain profobuf references to consume the grpc service. Dotnet requires additional references to support grpc calls: 
 
