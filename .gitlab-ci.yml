@@ -1,0 +1,25 @@
+default:
+  tags:
+    - nix-container-shell
+
+stages:
+  - build_binary
+  - build_image
+
+build:
+  stage: build_binary
+  script:
+    - nix build -L .#personality
+
+build:
+  stage: build_image
+  script:
+    - nix build -L .#personality-image
+    # work around gitlab not following syminks for artifact paths
+    # See: https://gitlab.com/gitlab-org/gitlab/-/issues/19746
+    - cp $(readlink result) .
+  artifacts:
+    paths:
+      - "*-image.tar.gz"
+    expire_in:  3 weeks
+

@@ -17,17 +17,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
   <ItemGroup>
-    <Protobuf Include="google\rpc\status.proto" GrpcServices="Client">
-      <SourceUrl>https://raw.githubusercontent.com/googleapis/googleapis/c81bb70/google/rpc/status.proto</SourceUrl>
+    <Protobuf Include="$(PROTOBUF_DEFS)\google\rpc\status.proto" GrpcServices="Client">
     </Protobuf>
-    <Protobuf Include="trillian.proto" GrpcServices="Client">
-      <SourceUrl>https://raw.githubusercontent.com/google/trillian/master/trillian.proto</SourceUrl>
+    <Protobuf Include="$(PROTOBUF_DEFS)\trillian.proto" GrpcServices="Client">
     </Protobuf>
-    <Protobuf Include="trillian_admin_api.proto" GrpcServices="Client">
-      <SourceUrl>https://raw.githubusercontent.com/google/trillian/master/trillian_admin_api.proto</SourceUrl>
+    <Protobuf Include="$(PROTOBUF_DEFS)\trillian_admin_api.proto" GrpcServices="Client">
     </Protobuf>
-    <Protobuf Include="trillian_log_api.proto" GrpcServices="Client">
-      <SourceUrl>https://raw.githubusercontent.com/google/trillian/master/trillian_log_api.proto</SourceUrl>
+    <Protobuf Include="$(PROTOBUF_DEFS)\trillian_log_api.proto" GrpcServices="Client">
     </Protobuf>
   </ItemGroup>
 </Project>

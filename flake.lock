@@ -1,0 +1,116 @@
+{
+  "nodes": {
+    "flock-of-flakes": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1661385446,
+        "narHash": "sha256-emjPxfAJ4VQDmTVvbqvGiPYAR37HBIoka5FqFVkCv7o=",
+        "ref": "refs/heads/master",
+        "rev": "a2dcf3c174765c042d6ef5f3c5e15465c9f3db4f",
+        "revCount": 11,
+        "type": "git",
+        "url": "https://git.ins.jku.at/proj/digidow/flock-of-flakes.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.ins.jku.at/proj/digidow/flock-of-flakes.git"
+      }
+    },
+    "googleapis": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1655507267,
+        "narHash": "sha256-QLRgXDTSefLN491eef0hKK7+iKn7undF7RUch35OPEg=",
+        "owner": "googleapis",
+        "repo": "googleapis",
+        "rev": "c81bb701eb53991d6faf74b2656eaf539261a122",
+        "type": "github"
+      },
+      "original": {
+        "owner": "googleapis",
+        "ref": "c81bb70",
+        "repo": "googleapis",
+        "type": "github"
+      }
+    },
+    "nix-filter-lib": {
+      "locked": {
+        "lastModified": 1666547822,
+        "narHash": "sha256-razwnAybPHyoAyhkKCwXdxihIqJi1G6e1XP4FQOJTEs=",
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "rev": "1a3b735e13e90a8d2fd5629f2f8363bd7ffbbec7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1661239106,
+        "narHash": "sha256-C5OCLnrv2c4CHs9DMEtYKkjJmGL7ySAZ1PqPkHBonxQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "963d27a0767422be9b8686a8493dcade6acee992",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flock-of-flakes": "flock-of-flakes",
+        "googleapis": "googleapis",
+        "nix-filter-lib": "nix-filter-lib",
+        "nixpkgs": [
+          "flock-of-flakes",
+          "nixpkgs"
+        ],
+        "trillian-google": "trillian-google"
+      }
+    },
+    "trillian-google": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667273952,
+        "narHash": "sha256-cBqrYcAnzHiLWOFgIW6NLXVAtq3ExATWwKfU1fXof5g=",
+        "owner": "google",
+        "repo": "trillian",
+        "rev": "9ec95bfb326ba38aec37c4fb97df51d8240884d0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "google",
+        "repo": "trillian",
+        "type": "github"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

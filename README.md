@@ -37,6 +37,15 @@ dotnet-grpc add-url -o google/rpc/status.proto -p personality.csproj -s Client h
 
 Last tested commit of the Google Trillian github repository was 940d76c. 
 
+## Create docker images with nix
+
+```shell
+nix build
+docker load <./result
+docker images #search for result
+docker run -p8080:80 -e "trillian_url=URL_TO_GRPC_ENDPOINT" HASH_OF_DOCKER_IMAGE
+```
+
 ## Notes SSL support
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout personality.key -out personality.crt -config devcert.conf 
