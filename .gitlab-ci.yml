@@ -1,25 +1,32 @@
+image: mcr.microsoft.com/dotnet/sdk:latest
+
 default:
   tags:
-    - nix-container-shell
+    - docker-images
 
 stages:
-  - build_binary
-  - build_image
+  - deploy
 
-build:
-  stage: build_binary
+variables:
+  OBJECTS_DIRECTORY: 'obj'
+  NUGET_PACKAGES_DIRECTORY: '.nuget'
+  SOURCE_CODE_PATH: 'personality/'
+
+cache:
+  key: "$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG"
+  paths:
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json'
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*'
+    - '$NUGET_PACKAGES_DIRECTORY'
+  policy: pull-push
+
+deploy:  
+  stage: deploy
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: [""]
   script:
-    - nix build -L .#personality
-
-build:
-  stage: build_image
-  script:
-    - nix build -L .#personality-image
-    # work around gitlab not following syminks for artifact paths
-    # See: https://gitlab.com/gitlab-org/gitlab/-/issues/19746
-    - cp $(readlink result) .
-  artifacts:
-    paths:
-      - "*-image.tar.gz"
-    expire_in:  3 weeks
-
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/personality"
+      --dockerfile "${CI_PROJECT_DIR}/personality/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}"
