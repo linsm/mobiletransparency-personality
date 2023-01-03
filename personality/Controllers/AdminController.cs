@@ -8,6 +8,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Grpc.Net.Client;
 using Trillian;
+using Microsoft.AspNetCore.Authorization;
 
 namespace personality.Controllers;
 
@@ -30,6 +31,7 @@ public class AdminController : ControllerBase
     }
 
     [HttpGet(Name = "GetTreeDetails")]
+    [Authorize]
     public string ListTrees() {
         ListTreesResponse accessibleTrees = _adminClient.ListTrees(new ListTreesRequest());
         return accessibleTrees.ToString();
@@ -44,6 +46,7 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost(Name = "CreateTree")]
+    [Authorize(Policies.TreeManagerPolicy)]
     public long CreateTree() {
         Tree tree = new Tree();
         tree.TreeType = TreeType.Log;        

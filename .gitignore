@@ -6,5 +6,6 @@ personality/trillian.proto
 personality/trillian_admin_api.proto
 personality/trillian_log_api.proto
 personality/google/rpc/status.proto
+personality/.vscode
 .swp.*
 result
