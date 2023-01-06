@@ -8,6 +8,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Grpc.Net.Client;
 using Trillian;
+using Microsoft.AspNetCore.Authorization;
 
 namespace personality.Controllers;
 
@@ -35,7 +36,7 @@ public class AdminController : ControllerBase
         return accessibleTrees.ToString();
     }
 
-        [HttpGet(Name = "GetTree")]
+    [HttpGet(Name = "GetTree")]
     public string GetTree(long treeId) {
         Tree tree = _adminClient.GetTree(new GetTreeRequest() {
             TreeId = treeId
@@ -44,7 +45,8 @@ public class AdminController : ControllerBase
     }
 
     [HttpPost(Name = "CreateTree")]
-    public long CreateTree() {
+    [Authorize(Policy = "onlyTreeManager")]
+    public ActionResult CreateTree() {      
         Tree tree = new Tree();
         tree.TreeType = TreeType.Log;        
         tree.TreeState = TreeState.Active;
@@ -57,10 +59,11 @@ public class AdminController : ControllerBase
         InitLogRequest initRequest = new InitLogRequest();       
         initRequest.LogId = newTree.TreeId;
         InitLogResponse initResponse = _logClient.InitLog(initRequest);   
-        return newTree.TreeId;
+        return Ok(newTree.TreeId);    
     }
 
     [HttpPost(Name = "DeleteTree")]
+    [Authorize(Policy = "onlyTreeManager")]
     public void DeleteTree(long treeId) {
         DeleteTreeRequest deleteRequest = new DeleteTreeRequest();
         deleteRequest.TreeId = treeId;

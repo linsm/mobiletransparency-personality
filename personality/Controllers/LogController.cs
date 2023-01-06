@@ -8,6 +8,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Grpc.Net.Client;
 using Trillian;
+using Microsoft.AspNetCore.Authorization;
 
 namespace personality.Controllers;
 
@@ -28,6 +29,7 @@ public class LogController : ControllerBase
     }
 
     [HttpPost(Name = "AddLogEntry")]
+    [Authorize]
     public string AddLogEntry(long treeId, [FromBody] LeafValue value)
     {
         Leaf leaf = new Leaf(treeId, value);

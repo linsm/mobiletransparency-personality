@@ -8,3 +8,4 @@ personality/trillian_log_api.proto
 personality/google/rpc/status.proto
 .swp.*
 result
+personality123.tar.gz
