@@ -21,7 +21,9 @@
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 "key_treemanager": "treemanager",
                 "key_logwriter": "logwriter",
-                "trillian_url": "http://localhost:8090"
+                "trillian_url": "http://localhost:8090",
+                "admin_password": "asjvheojfl213",
+                "buildserver_password": "asjvheojfl213"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

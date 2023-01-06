@@ -32,7 +32,7 @@ public class LoginController : ControllerBase
     public ActionResult Login([FromBody] User user)
     {
         if(user != null) {
-            if((user.Username == "admin" && user.Password == "asdf123") || (user.Username == "buildserver" && user.Password == "asdf456")) {
+            if((user.Username == "admin" && user.Password == Environment.GetEnvironmentVariable("admin_password")) || (user.Username == "buildserver" && user.Password == Environment.GetEnvironmentVariable("buildserver_password"))) {
                 string jwtToken = GenerateJwtToken(user);
                 return Ok(new {token = jwtToken});
             }
