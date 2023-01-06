@@ -31,6 +31,11 @@ builder.Services.AddSwaggerGen(options => {
         }, new string[] {}}
     });
 });
+
+if(Environment.GetEnvironmentVariable("security_key") == null) {
+    throw new ArgumentNullException("security_key");
+}
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => 
     {
@@ -39,9 +44,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["JWTAuthentication:Issuer"],
-            ValidAudience = builder.Configuration["JWTAuthentication:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWTAuthentication:SecurityKey"]))
+            ValidIssuer = Environment.GetEnvironmentVariable("issuer"),
+            ValidAudience = Environment.GetEnvironmentVariable("audience"),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("security_key")))
         };
     });
 builder.Services.AddAuthorization(options => {

@@ -41,22 +41,29 @@ public class LoginController : ControllerBase
     }
 
     private string GenerateJwtToken(User user) {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWTAuthentication:SecurityKey"]));
-        var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+        string? securityKey = Environment.GetEnvironmentVariable("security_key");
+        string? issuer = Environment.GetEnvironmentVariable("issuer");
+        string? audience = Environment.GetEnvironmentVariable("audience");
+        if(securityKey != null && issuer != null && audience != null)
+        {
+             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityKey));
+            var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
-        List<Claim> claims = new List<Claim>();
-        claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Username));
+            List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Username));
 
-        if(user.Username == "admin") {
-            claims.Add(new Claim(ClaimTypes.Role, "treeManager"));
+            if(user.Username == "admin") {
+                claims.Add(new Claim(ClaimTypes.Role, "treeManager"));
+            }
+
+            var jwtToken = new JwtSecurityToken(issuer, 
+                audience, 
+                claims, 
+                expires: DateTime.Now.AddDays(1), 
+                signingCredentials: signingCredentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(jwtToken);
         }
-
-        var jwtToken = new JwtSecurityToken(_configuration["JWTAuthentication:Issuer"], 
-            _configuration["JWTAuthentication:Audience"], 
-            claims, 
-            expires: DateTime.Now.AddDays(1), 
-            signingCredentials: signingCredentials);
-
-        return new JwtSecurityTokenHandler().WriteToken(jwtToken);
+        return "";       
     }
 }
