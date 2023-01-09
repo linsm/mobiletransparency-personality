@@ -30,19 +30,14 @@ public class AdminController : ControllerBase
         _logClient = new TrillianLog.TrillianLogClient(channel);        
     }
 
-    [HttpGet(Name = "GetTreeDetails")]
-    public string ListTrees() {
-        ListTreesResponse accessibleTrees = _adminClient.ListTrees(new ListTreesRequest());
-        return accessibleTrees.ToString();
-    }
-
-    [HttpGet(Name = "GetTree")]
-    public string GetTree(long treeId) {
-        Tree tree = _adminClient.GetTree(new GetTreeRequest() {
-            TreeId = treeId
-        });
-        return tree.ToString();
-    }
+    // ML: Currently, this functionality is not needed by any API consumer
+    // [HttpGet(Name = "GetTree")]
+    // public string GetTree(long treeId) {
+    //     Tree tree = _adminClient.GetTree(new GetTreeRequest() {
+    //         TreeId = treeId
+    //     });
+    //     return tree.ToString();
+    // }
 
     [HttpPost(Name = "CreateTree")]
     [Authorize(Policy = "onlyTreeManager")]

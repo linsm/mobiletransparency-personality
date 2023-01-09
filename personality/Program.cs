@@ -57,7 +57,7 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection(); ML: Meeting with MR: Currently, the reverse proxy should have http access. 
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

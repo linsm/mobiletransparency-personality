@@ -27,9 +27,9 @@ public class LoginController : ControllerBase
         _configuration = configuration;
     }
 
-    [HttpPost(Name = "Login")]
+    [HttpPost(Name = "RequestAccessToken")]
     [AllowAnonymous]
-    public ActionResult Login([FromBody] User user)
+    public ActionResult RequestAccessToken([FromBody] User user)
     {
         if(user != null) {
             if((user.Username == "admin" && user.Password == Environment.GetEnvironmentVariable("admin_password")) || (user.Username == "buildserver" && user.Password == Environment.GetEnvironmentVariable("buildserver_password"))) {

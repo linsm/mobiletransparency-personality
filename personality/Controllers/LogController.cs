@@ -8,7 +8,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Grpc.Net.Client;
 using Trillian;
-using Microsoft.AspNetCore.Authorization;
 
 namespace personality.Controllers;
 
@@ -18,6 +17,7 @@ public class LogController : ControllerBase
 {
     private readonly ILogger<LogController> _logger;
     private readonly TrillianLog.TrillianLogClient _logClient;
+    private readonly TrillianAdmin.TrillianAdminClient _adminClient;
 
     public LogController(ILogger<LogController> logger)
     {
@@ -26,18 +26,13 @@ public class LogController : ControllerBase
         if(address == null) throw new HttpRequestException();                
         GrpcChannel channel = GrpcChannel.ForAddress(address);
         _logClient = new TrillianLog.TrillianLogClient(channel);
+        _adminClient = new TrillianAdmin.TrillianAdminClient(channel);        
     }
 
-    [HttpPost(Name = "AddLogEntry")]
-    [Authorize]
-    public string AddLogEntry(long treeId, [FromBody] LeafValue value)
-    {
-        Leaf leaf = new Leaf(treeId, value);
-        QueueLeafRequest leafRequest = new QueueLeafRequest();
-        leafRequest.LogId = leaf.treeId;
-        leafRequest.Leaf = leaf.buildLogLeaf();
-        var reply = _logClient.QueueLeaf(leafRequest);
-        return reply.ToString();
+    [HttpGet(Name = "ListTrees")]
+    public string ListTrees() {
+        ListTreesResponse accessibleTrees = _adminClient.ListTrees(new ListTreesRequest());
+        return accessibleTrees.ToString();
     }
 
     [HttpPost(Name = "InclusionProof")]
