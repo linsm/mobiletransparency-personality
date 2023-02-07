@@ -22,8 +22,8 @@
                 "key_treemanager": "treemanager",
                 "key_logwriter": "logwriter",
                 "trillian_url": "http://localhost:8090",
-                "admin_password": "asjvheojfl213",
-                "buildserver_password": "asjvheojfl213"
+                "admin_password": "",
+                "buildserver_password": ""
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
