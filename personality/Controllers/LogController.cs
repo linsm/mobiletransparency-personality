@@ -59,10 +59,10 @@ public class LogController : ControllerBase
     }
 
     [HttpGet(Name="LatestSignedLogRoot")]
-    public string GetLatestSignedLogRoot(long treeId) {
+    public string LatestSignedLogRoot(long treeId) {
         GetLatestSignedLogRootRequest request = new GetLatestSignedLogRootRequest();
-        request.LogId = treeId;
+        request.LogId = treeId;        
         GetLatestSignedLogRootResponse response = _logClient.GetLatestSignedLogRoot(request);
-        return response.Proof.Hashes.ToString();
+        return response.SignedLogRoot.ToString();
     }
 }
