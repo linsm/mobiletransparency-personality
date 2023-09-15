@@ -52,3 +52,10 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout personality.key -out
 openssl pkcs12 -export -out personality.pfx -inkey personality.key -in personality.crt
 docker run --rm -it -p 8000:80 -p 8001:443 -e Kestrel\_\_Certificates\_\_Default\_\_Path=/app/Infrastructure/Certificate/personality.pfx -e Kestrel\_\_Certificates\_\_Default\_\_Password=INSERTPASSWORD -e "ASPNETCORE_URLS=https://+;http://+" -v /PATHTOFOLDERWHERECERTISSTORED/:/app/Infrastructure/Certificate personality
 
+## LICENSE
+
+Licensed under the EUPL, Version 1.2 or – as soon they will be approved by
+the European Commission - subsequent versions of the EUPL (the "Licence").
+You may not use this work except in compliance with the Licence.
+
+**License**: [European Union Public License v1.2](https://joinup.ec.europa.eu/software/page/eupl)
